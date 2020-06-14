@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="keywords" LANG="fr" content="html">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- mettre a l'echelle pour le telephone -->
+  <link id="css" rel="stylesheet" href="style_hp.css">
+  <title>À vous ! </title>
+</head>
+<body onload="getSpells();">
+  <header>
+    <section id=banner_turn class="inner">
+      <div class="connexion">
+        <a href='principale.php?deconnexion=true'><span>Déconnexion</span></a>
+      </div>
+      <div>
+        <img src="logo4.png" width=90px >
+        <h1>HOGWARTS AT EFREI </h1>
+        <p> Not for Muggle </p>
+      </div>
+      <div><h5> Théme :</h5>
+        <button onclick="document.getElementById('css').href='gryffondor.css';">Gryffondor </button>
+        <button onclick="document.getElementById('css').href='serpentard.css';">Serpentard </button>
+        <button onclick="document.getElementById('css').href='poufsouffle.css';">Poufsouffle </button>
+        <button onclick="document.getElementById('css').href='serdaigle.css';">Serdaigle </button>
+</div>
+      <div id=menu>
+        <ul>
+          <li><a href="accueil.html">Accueil</a>
+          <li><a href="#home">Fleury et bott</a>
+            <ul>
+              <li><a href="potion.html">Potion</a></li>
+              <li><a href="sort.html">Sortilège</a></li>
+              <li><a href="quidditch.html">Quidditch</a></li>
+                <li><a href="perso.html">Personnages</a></li>
+            </ul>
+          </li>
+          <li><a href="yourturn.html">À vous de jouer</a></li>
+          <li><a href="who.html">Qui sommes nous ?</a></li>
+        </ul>
+      </div>
+    </section>
+  </header>
+
+
+  <header class=content_center>
+    <H2> Ajoutez vos sorts : </H2>
+  <div id=cahierSort>
+  <form name="formu" action="#" id="formulaire" onsubmit="return false" class=ajoutsort>
+    <div class=flex id="header">
+      <input class=case type ="text" name ="sort" id="sort1" size="30"  placeholder="Sortilège " required>
+      <input class=case type ="text" name ="type" id="type1" size="30" placeholder="Type "  required >
+      <input class=case type="text" id="effet1" name="effet" size="30"placeholder="Effet du sort" >
+    </div>
+    <div >
+      <button class=turn type="submit" id="bouton" value="Ajouter"  onclick="return verif_champ(this.form);">Ajouter </button> <!--onclick pour lancer la fonction lorsque l'on appuie sur le bouton -->
+      <button class=turn type="reset" id="reset" value="Delete" onclick="SupprimerTout(this.form.liste);">Tout supprimer</button>
+    </div>
+  </form>
+  </div>
+  </header>
+  <main>
+  <div  style="width:100%;overflow:auto;">
+    <table class="content_center" id="tablespell">
+      <thead>
+        <th id="sort2">SORTILÈGES</th>
+        <th id="type2">TYPE</th>
+        <th id="effet2">EFFET</th>
+      </thead>
+    </table>
+  </div>
+</main>
+<footer align=center>
+<p>
+      © Potterhead &nbsp; |&nbsp;
+     Suivez-nous :
+    <a href=instagram.fr>  <img src="insta_logo.jpg"  width="2%"></a>
+<a href=facebook.fr>  <img src="fb.jpg"  width="2%"></a>
+|&nbsp;
+ <a href=about.html >En savoir plus </a>
+</p>
+</footer>
+
+  <script type="text/javascript">
+
+  var sort2 = document.getElementById('sort2').value;
+  var type2 = document.getElementById('type2').value;
+  var effet2 = document.getElementById('effet2').value;
+  //var tbody2 = document.getElementById('dataspell');
+
+  var tblBody = document.createElement("tbody");
+  function createSpellWrite(sort1,type1,effet1){
+    document.getElementById('tablespell').appendChild(tblBody);
+    var sort1 = document.getElementById('sort1').value;
+    var type1 = document.getElementById('type1').value;
+    var effet1 = document.getElementById('effet1').value;
+    var  TR2 = tblBody.insertRow();
+    cell0  = TR2.insertCell(0);
+    cell1 = TR2.insertCell(1);
+    cell2 = TR2.insertCell(2);
+    cell0.append(sort1);
+    cell1.append(type1);
+    cell2.append(effet1);
+  }
+  function createSpell(sort2,type2,effet2){
+    document.getElementById('tablespell').appendChild(tblBody);
+    var  TR2 = tblBody.insertRow();
+    cell0  = TR2.insertCell(0);
+    cell1 = TR2.insertCell(1);
+    cell2 = TR2.insertCell(2);
+    cell0.append(sort2);
+    cell1.append(type2);
+    cell2.append(effet2);
+  }
+
+  function getSpells(){
+    fetch('https://www.potterapi.com/v1/spells/?key=$2a$10$cFnG2eU.U0izrzW3OE5PLO/nBbdXsQFl0TtmhtFS8SuK1I/MSTgSG')
+    .then(response => response.json())
+    .then(function (data) {
+      console.log('data', data)// on recupere 200 lignes qui correspondent au lignes de notre tableau
+      data.forEach(function(array) {
+        createSpell(array.spell,array.type,array.effect);
+      });
+
+    })
+  }
+  function SupprimerTout()
+  { // je l'appel ensuite dans mon bouton avec onclick
+    tblBody.remove();
+
+     //newtbody.appendChild(newContent);
+  }
+
+
+
+  function verif_champ()
+  {
+    var sort1 = document.getElementById('sort1').value;
+    var type1 = document.getElementById('type1').value;
+    var effet1 = document.getElementById('effet1').value;
+    if (sort1 == "" || type1 == "" || effet1 == "" )
+    {
+      alert("Tu as mal appris ton sortilège ! \n Il manque des informations");
+      return false;
+    }
+    return createSpellWrite();
+  }
+
+  function showPotion(formSort) {
+    document.getElementById("tablespell").style.opacity = 0;
+    document.getElementById("formulaire").style.opacity = 0;
+    document.getElementById("cahierSort").style.opacity = 0;
+    document.getElementById("formSort").style.opacity = 1;
+  }
+
+  function showSort(formulaire) {
+    document.getElementById("tablespell").style.opacity = 1;
+    document.getElementById("formulaire").style.opacity = 1;
+    document.getElementById("cahierSort").style.opacity = 1;
+    document.getElementById("formSort").style.opacity = 0;
+
+  }
+
+
+  </script>
+
+  </body>
+  </html>

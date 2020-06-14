@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="keywords" LANG="fr" content="html">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- mettre a l'echelle pour le telephone -->
+  <link rel="stylesheet" href="style_hp.css">
+
+  <title>Accueil</title>
+
+</head>
+<body>
+  <header>
+    <section id=banner class="inner">
+      <div class="connexion">
+        <a href=login.php>LOGIN</a>
+      </div>
+      <div>
+        <img src="logo4.png" width=90px >
+          <h1>HOGWARTS AT EFREI </h1>
+        <p> Not for Muggle </p>
+      </div>
+
+      <div id=menu>
+        <ul>
+          <li><a href="#home">Fleury et bott</a>
+            <ul>
+              <li><a href="potion.html">Potion</a></li>
+              <li><a href="sort.html">Sortilège</a></li>
+              <li><a href="quidditch.html">Quidditch</a></li>
+                <li><a href="perso.html">Personnages</a></li>
+            </ul>
+          </li>
+          <li><a href="yourturn.html">À vous de jouer</a></li>
+          <li><a href="who.html">Qui sommes nous ?</a></li>
+        </ul>
+      </div>
+    </section>
+  </header>
+  <hr>
+  <main class="content_center">
+    <h1>Bienvenue à toi jeune sorcier ! <br></h1>
+    <p>
+      Te voilà dans le merveilleux monde de <strong>Poudlard</strong>, si tu es ici, c’est que tu as reçu ta lettre, alors félicitations !<br><br>
+      Tu vas apprendre à utiliser tes pouvoirs mais surtout à les maitriser, alors tu auras différentes rubriques pour apprendre et surtout t’amuser.<br><br>
+      Avant de commencer, connecte toi pour regarder qu’elle maison t’a attribué le choixpeau magique. <br>Mais également pour connaître ton <strong>patronus.</strong> </p>
+
+<img src="patronus.gif">
+<br>
+
+  </main>
+
+
+    <footer align=center>
+<p>
+          © Potterhead &nbsp; |&nbsp;
+         Suivez-nous :
+        <a href=instagram.fr>  <img src="insta_logo.jpg"  width="2%"></a>
+<a href=facebook.fr>  <img src="fb.jpg"  width="2%"></a>
+|&nbsp;
+     <a href=about.html >En savoir plus </a>
+</p>
+    </footer>
+
+
+  <script type="text/javascript">
+
+
+  function getCharacters(){
+    fetch("https://www.potterapi.com/v1/characters/?key=$2a$10$cFnG2eU.U0izrzW3OE5PLO/nBbdXsQFl0TtmhtFS8SuK1I/MSTgSG")
+    .then(response => response.json())
+    .then(function (data) {
+      console.log('data', data)// on recupere 200 lignes qui correspondent au lignes de notre tableau
+      // votre code ici
+      //for (var i = data.length; i < data.length; i++) {
+      //  var myArray = [];
+      //  console.log(data[i]);
+      //  data.push( data[i]);
+      data.forEach(function(array) {
+        createTask(array.bloodStatus,array.name,array.role,array.house,array.school);
+      });
+
+    })
+  }
+  var blood = document.getElementById('blood').value;
+  var name = document.getElementById('name').value;
+  var role = document.getElementById('role').value;
+  var house = document.getElementById('house').value;
+  var school = document.getElementById('school').value;
+  var tabletask = document.getElementById('tablecharacter');
+  var tbody1 = document.getElementById('datacharac');
+  document.getElementById('tablecharacter').appendChild(tbody1);
+  var tbody2 = document.getElementById('dataspell');
+  document.getElementById('tablespell').appendChild(tbody2);
+
+  function createTask(blood, name, role, house,school){
+    var  TR1 = tbody1.insertRow();
+    cell5  = TR1.insertCell(0);
+    cell6 = TR1.insertCell(1);
+    cell7 = TR1.insertCell(2);
+    cell8 = TR1.insertCell(3);
+    cell9 = TR1.insertCell(4);
+    cell5.append(blood);
+    cell6.append(name);
+    cell7.append(role);
+    cell8.append(house);
+    cell9.append(school);
+  }
+
+  function getHome(){
+    fetch('https://www.potterapi.com/v1/sortingHat')
+    .then(response => response.json())
+    .then(function (data) {
+      console.log('data', data)// on recupere 200 lignes qui correspondent au lignes de notre tableau
+      alert('Pour toi ce sera la maison... ' + data);
+    })
+  }
+
+  </script>
+</body>
+</html>

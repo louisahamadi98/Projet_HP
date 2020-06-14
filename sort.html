@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="keywords" LANG="fr" content="html">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- mettre a l'echelle pour le telephone -->
+  <link rel="stylesheet" href="style_hp.css">
+  <title>Sortilèges</title>
+</head>
+<body onload="getSpells()">
+  <header>
+    <section id=banner_sort class="inner">
+      <div class="connexion">
+        <a href=login.php>LOGIN</a>
+      </div>
+      <div>
+        <img src="logo4.png" width=90px >
+        <h1>HOGWARTS AT EFREI  </h1>
+        <p> Not for Muggle </p>
+      </div>
+
+      <div id=menu>
+        <ul>
+          <li><a href="accueil.html">Accueil</a>
+            <li><a href="#home">Fleury et bott</a>
+              <ul>
+                <li><a href="potion.html">Potion</a></li>
+                <li><a href="sort.html">Sortilège</a></li>
+                <li><a href="quidditch.html">Quidditch</a></li>
+                  <li><a href="perso.html">Personnages</a></li>
+              </ul>
+            </li>
+            <li><a href="yourturn.html">À vous de jouer</a></li>
+            <li><a href="who.html">Qui sommes nous ?</a></li>
+          </ul>
+        </div>
+      </section>
+    </header>
+    <hr>
+    <div class=content_left>
+    <p>Te voici à présent au cours de sortilèges, nous apprenons ici toutes sortes de sortilèges et nous t’avons résumé la plupart de ceux-ci, ci-dessous. <br>
+
+Les sortilèges impardonnables :<br>
+
+L’utilisation d’un sortilège impardonnable te fera gagner un aller simple pour Azkaban (la prison des sorciers) !<br>
+Il existe trois sortilèges impardonnables :<br>
+Le premier est le sortilège de l’imperium, il permet de contrôler la personne ensorcelée et il ets indétectable à l’œil nu.
+ La personne ensorcelée obéit alors au doigt et à l’œil de la personne qui lui a lancé ce sortilège.<br>
+Le second sortilège impardonnable est le sortilège Doloris.
+C’est le sortilège de torture, la personne touchée se plie de douleur, c’est un sortilège qui a beaucoup été utilisé pendant la sombre période où Voldemort rodait.<br>
+Le troisième et dernier sortilège est Avada Kedavra, c’est le sortilège de la mort. La personne touchée meurt alors instantanément. <br>
+Alors on t’aura prévenu, ne t’avises pas d’utiliser ces sortilèges mais il est important que tu connaisses leur existence et surtout leurs dangers.
+</p>
+  </div>
+    <main class="content_sort">
+      <h1> Carnet magique <img src="baguette.png" width=50px></h1>
+    </main>
+    <div>
+      <table class="content_sort" id="tablespell">
+        <thead>
+          <th id="sort">SORTILÈGES</th>
+          <th id="type">TYPE</th>
+          <th id="effet">EFFET</th>
+        </thead>
+        <tbody id="dataspell" >
+        </tbody>
+      </table>
+    </div>
+    <footer align=center>
+<p>
+          © Potterhead &nbsp; |&nbsp;
+         Suivez-nous :
+        <a href=instagram.fr>  <img src="insta_logo.jpg"  width="2%"></a>
+<a href=facebook.fr>  <img src="fb.jpg"  width="2%"></a>
+|&nbsp;
+     <a href=about.html >En savoir plus </a>
+</p>
+    </footer>
+
+
+    <script type="text/javascript">
+    var sort = document.getElementById('sort').value;
+    var type = document.getElementById('type').value;
+    var effet = document.getElementById('effet').value;
+    var tbody2 = document.getElementById('dataspell');
+    document.getElementById('tablespell').appendChild(tbody2);
+
+    function createSpell(sort,type,effet){
+      var  TR2 = tbody2.insertRow();
+      cell0  = TR2.insertCell(0);
+      cell1 = TR2.insertCell(1);
+      cell2 = TR2.insertCell(2);
+      cell0.append(sort);
+      cell1.append(type);
+      cell2.append(effet);
+
+    }
+
+    function getSpells(){
+      fetch('https://www.potterapi.com/v1/spells/?key=$2a$10$cFnG2eU.U0izrzW3OE5PLO/nBbdXsQFl0TtmhtFS8SuK1I/MSTgSG')
+      .then(response => response.json())
+      .then(function (data) {
+        console.log('data', data)// on recupere 200 lignes qui correspondent au lignes de notre tableau
+        data.forEach(function(array) {
+          createSpell(array.spell,array.type,array.effect);
+        });
+
+      })
+    }
+    </script>
+  </body>
+  </html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="keywords" LANG="fr" content="html">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- mettre a l'echelle pour le telephone -->
+  <link id="css" rel="stylesheet" href="style_hp.css">
+  <title>Potions </title>
+</head>
+<body onload="getSpells();">
+  <header>
+    <section id=banner_potion class="inner">
+      <div class="connexion">
+        <a href='principale.php?deconnexion=true'><span>Déconnexion</span></a>
+      </div>
+      <div>
+        <img src="logo4.png" width=90px >
+        <h1>HOGWARTS AT EFREI </h1>
+        <p> Not for Muggle </p>
+      </div>
+
+      <div id=menu>
+        <ul>
+          <li><a href="accueil.html">Accueil</a>
+          <li><a href="#home">Fleury et bott</a>
+            <ul>
+              <li><a href="#potion">Potion</a></li>
+              <li><a href="sort.html">Sortilège</a></li>
+              <li><a href="quidditch.html">Quidditch</a></li>
+                <li><a href="perso.html">Personnages</a></li>
+            </ul>
+          </li>
+          <li><a href="yourturn.html">À vous de jouer</a></li>
+          <li><a href="who.html">Qui sommes nous ?</a></li>
+        </ul>
+      </div>
+    </section>
+  </header>
+  <br><br>
+  <div class=content_potion>
+    <br><br>
+<h3>Recette</h3>
+<p><strong> Potion de Polynectar </strong></p>
+
+<p> - 0,5 litres de bave de crapaud<br>
+  - 0,3 litres de venin d'araignée<br>
+  - 2 cuillères de jus de foie de mourue<br>
+  - 1 paire d'oeil de loup-garou<br>
+  - Quelques insectes<br>
+
+
+</p>
+    </div>
+  <header class=content_sort>
+
+  <br><img src="logo_potion.png" width=50px>  <h2> Bienvenue dans la rubrique potion </h2>
+  <p> Vous pouvez crée votre potion ci-dessous</p>
+    <form name="formulaire" action="#" id="formSort" onsubmit="return false" class=ajoutsort>
+      <table align=center>
+     <th>1er ingrédient  </th>
+<th>2ème ingrédient </th>
+<th>3ème ingrédient </th>
+<tr><td>
+     <select>
+       <option>Corne de licorne</option>
+        <option>Champignon magique</option>
+        <option>Jus de citrouille</option>
+        <option>Plume de Paon</option>
+        <option>Sang de dragon</option>
+        <option>Pierre de lune</option>
+        <option>Bave de limace</option>
+        <option>Écorce de houx magique</option>
+        <option>Charbon</option>
+        <option>Crin de licorne</option>
+      </select>
+      </td>
+    <td>
+      <select>
+        <option>Corne de licorne</option>
+         <option>Champignon magique</option>
+         <option>Jus de citrouille</option>
+         <option>Plume de Paon</option>
+         <option>Sang de dragon</option>
+         <option>Pierre de lune</option>
+         <option>Bave de limace</option>
+         <option>Écorce de houx magique</option>
+         <option>Charbon</option>
+         <option>Crin de licorne</option>
+      </select>
+</td>
+<td>
+            <select>
+              <option>Corne de licorne</option>
+               <option>Champignon magique</option>
+               <option>Jus de citrouille</option>
+               <option>Plume de Paon</option>
+               <option>Sang de dragon</option>
+               <option>Pierre de lune</option>
+               <option>Bave de limace</option>
+               <option>Écorce de houx magique</option>
+               <option>Charbon</option>
+               <option>Crin de licorne</option>
+            </select>
+            </td></tr></table>
+            <button type="button" id='affiche' onclick="creePotions();">Créer la potion </button>
+      </form>
+      <div id=potion > </div><br><br>
+      <img src="potion.gif"><br><br>
+    </header>
+
+    <script type="text/javascript">
+
+      function creePotions(){
+        var tab = ['Potions	affaiblissante ', "Potion d'Amnésie ", "Philtre d'amour", 'Potion anti-paralysie','Élixir de longue vie',"Mélange malveillant","Potion de Mémoire","Philtre de Mort Vivante","Philtre de Confusion","Polynectar","Goutte du sommeil","Potion d'Hilarité","Vapeurs de fatigue","Philtre d'Embrouille"];
+      var numRandom = Math.floor(Math.random()*tab.length);
+      var potionRandom = tab[numRandom];
+      document.getElementById('potion').innerHTML=('<br>Votre potion est ' + potionRandom);
+      }
+    </script>
+    <footer align=center>
+<p>
+          © Potterhead &nbsp; |&nbsp;
+         Suivez-nous :
+        <a href=instagram.fr>  <img src="insta_logo.jpg"  width="2%"></a>
+<a href=facebook.fr>  <img src="fb.jpg"  width="2%"></a>
+|&nbsp;
+     <a href=about.html >En savoir plus </a>
+</p>
+    </footer>
+</body>
+</html>
